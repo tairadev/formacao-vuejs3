@@ -15,5 +15,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .box {
   background: #faf0ca;
+  color: #22223b;
 }
 </style>

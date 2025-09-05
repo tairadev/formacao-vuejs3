@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box formulario">
     <div class="columns">
       <div
         class="column is-8"
@@ -46,3 +46,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.formulario {
+  background: var(--bg-primario);
+  color: var(--texto-primario);
+}
+</style>
