@@ -21,6 +21,7 @@
 import { defineComponent } from "vue";
 import { useStore } from "@/store";
 import { ADICIONAR_PROJETO, ATUALIZAR_PROJETO } from "@/store/mutations-types";
+import { TipoNotificacao } from "@/interfaces/INotificacao";
 
 export default defineComponent({
   name: "FormularioProjetos",
@@ -52,6 +53,11 @@ export default defineComponent({
         this.store.commit(ADICIONAR_PROJETO, this.nomeDoProjeto);
       }
       this.nomeDoProjeto = "";
+      this.store.commit("notificar", {
+        tipo: TipoNotificacao.Sucesso,
+        titulo: "Sucesso!",
+        texto: "Projeto salvo com sucesso!",
+      });
       this.$router.push("/projetos");
     },
   },
