@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.display {
-  color: var(--texto-primario);
+.display strong {
+  color: #000000;
 }
 </style>

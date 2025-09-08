@@ -12,7 +12,7 @@ export default defineComponent({
   data() {
     return {
       estilos: {
-        background: "#faf0ca",
+        background: "rgba(161, 145, 83, 1)",
         color: "#22223b",
       },
     };
