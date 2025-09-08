@@ -1,19 +1,45 @@
 <template>
   <Formulario @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
-    <Tarefa v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa" />
+    <Tarefa
+      v-for="(tarefa, i) in tarefas"
+      :key="i"
+      :tarefa="tarefa"
+      @aoTarefaClicada="selecionarTarefa"
+    />
     <Box v-if="!tarefas.length"> Você não está muito produtivo hoje :( </Box>
-    <div class="modal">
+    <div
+      class="modal"
+      :class="{ 'is-active': tarefaSelecionada }"
+      v-if="tarefaSelecionada"
+    >
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Modal title</p>
-          <button class="delete" aria-label="close"></button>
+          <p class="modal-card-title">Editando uma tarefa</p>
+          <button
+            class="delete"
+            aria-label="close"
+            @click="fecharModal"
+          ></button>
         </header>
-        <section class="modal-card-body">...</section>
+        <section class="modal-card-body">
+          <div class="field">
+            <label for="descricao">
+              Descrição
+              <input
+                v-model="tarefaSelecionada.descricao"
+                id="descricao"
+                class="input"
+                type="text"
+                placeholder="Descrição da tarefa"
+              />
+            </label>
+          </div>
+        </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Save changes</button>
-          <button class="button">Cancel</button>
+          <button class="button is-success">Salvar alterações</button>
+          <button @click="fecharModal" class="button">Cancelar</button>
         </footer>
       </div>
     </div>
@@ -40,9 +66,20 @@ export default defineComponent({
     Tarefa,
     Box,
   },
+  data() {
+    return {
+      tarefaSelecionada: null as ITarefa | null,
+    };
+  },
   methods: {
     salvarTarefa(tarefa: ITarefa) {
       this.store.dispatch(CADASTRAR_TAREFA, tarefa);
+    },
+    selecionarTarefa(tarefa: ITarefa) {
+      this.tarefaSelecionada = tarefa;
+    },
+    fecharModal() {
+      this.tarefaSelecionada = null;
     },
   },
   setup() {
