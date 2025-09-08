@@ -8,19 +8,25 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: "/projetos",
-    name: "Projetos",
     component: () => import("@/views/Projetos.vue"),
-  },
-  {
-    path: "/projetos/novo",
-    name: "NovoProjeto",
-    component: () => import("@/views/Projetos/Formulario.vue"),
-  },
-  {
-    path: "/projetos/:id",
-    name: "ProjetoDetalhe",
-    component: () => import("@/views/Projetos/Formulario.vue"),
-    props: true,
+    children: [
+      {
+        path: "",
+        name: "ListaProjetos",
+        component: () => import("@/views/Projetos/Lista.vue"),
+      },
+      {
+        path: "novo",
+        name: "NovoProjeto",
+        component: () => import("@/views/Projetos/Formulario.vue"),
+      },
+      {
+        path: ":id",
+        name: "ProjetoDetalhe",
+        component: () => import("@/views/Projetos/Formulario.vue"),
+        props: true,
+      },
+    ],
   },
 ];
 
