@@ -11,6 +11,17 @@ const routes: RouteRecordRaw[] = [
     name: "Projetos",
     component: () => import("@/views/Projetos.vue"),
   },
+  {
+    path: "/projetos/novo",
+    name: "NovoProjeto",
+    component: () => import("@/views/Projetos/Formulario.vue"),
+  },
+  {
+    path: "/projetos/:id",
+    name: "ProjetoDetalhe",
+    component: () => import("@/views/Projetos/Formulario.vue"),
+    props: true,
+  },
 ];
 
 const router = createRouter({

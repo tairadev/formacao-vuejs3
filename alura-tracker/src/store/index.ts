@@ -20,6 +20,14 @@ export const store = createStore<State>({
       };
       state.projetos.push(projeto);
     },
+    atualizarProjeto(state, projetoAtualizado: IProjeto) {
+      const index = state.projetos.findIndex(
+        (projeto) => projeto.id === projetoAtualizado.id
+      );
+      if (index !== -1) {
+        state.projetos[index].nome = projetoAtualizado.nome;
+      }
+    },
   },
 });
 
