@@ -6,3 +6,4 @@ export const DEFINIR_PROJETOS = "definirProjetos";
 export const NOTIFICAR = "notificar";
 
 export const DEFINIR_TAREFAS = "definirTarefas";
+export const ALTERA_TAREFA = "alteraTarefa";

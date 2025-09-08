@@ -5,3 +5,4 @@ export const EXCLUIR_PROJETO = "excluirProjeto";
 
 export const OBTER_TAREFAS = "obterTarefas";
 export const CADASTRAR_TAREFA = "cadastrarTarefa";
+export const ALTERAR_TAREFA = "alterarTarefa";

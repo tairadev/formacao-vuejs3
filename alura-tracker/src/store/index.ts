@@ -3,6 +3,7 @@ import { InjectionKey } from "vue";
 import { createStore, Store, useStore as vuexUseStore } from "vuex";
 import {
   ADICIONAR_PROJETO,
+  ALTERA_TAREFA,
   ATUALIZAR_PROJETO,
   DEFINIR_PROJETOS,
   DEFINIR_TAREFAS,
@@ -12,6 +13,7 @@ import {
 import { INotificacao } from "@/interfaces/INotificacao";
 import {
   ALTERAR_PROJETO,
+  ALTERAR_TAREFA,
   CADASTRAR_PROJETO,
   CADASTRAR_TAREFA,
   EXCLUIR_PROJETO,
@@ -60,6 +62,14 @@ export const store = createStore<State>({
     [DEFINIR_TAREFAS](state, tarefas) {
       state.tarefas = tarefas;
     },
+    [ALTERA_TAREFA](state, tarefaAtualizada: ITarefa) {
+      const index = state.tarefas.findIndex(
+        (tarefa) => tarefa.id === tarefaAtualizada.id
+      );
+      if (index !== -1) {
+        state.tarefas[index] = tarefaAtualizada;
+      }
+    },
     [NOTIFICAR](state, notificacao: INotificacao) {
       state.notificacoes.push(notificacao);
       setTimeout(() => {
@@ -92,6 +102,11 @@ export const store = createStore<State>({
     [CADASTRAR_TAREFA]({ dispatch }, tarefa: ITarefa) {
       return http.post("/tarefas", tarefa).then(() => {
         dispatch(OBTER_TAREFAS);
+      });
+    },
+    [ALTERAR_TAREFA]({ commit }, tarefa: ITarefa) {
+      return http.put(`/tarefas/${tarefa.id}`, tarefa).then(() => {
+        commit(ALTERA_TAREFA, tarefa);
       });
     },
   },
