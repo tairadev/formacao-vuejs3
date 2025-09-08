@@ -53,7 +53,7 @@ export default defineComponent({
 
     return {
       store,
-      projetos: computed(() => store.state.projetos),
+      projetos: computed(() => store.state.projeto.projetos),
     };
   },
   methods: {

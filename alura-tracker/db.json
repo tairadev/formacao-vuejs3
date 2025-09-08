@@ -13,7 +13,7 @@
     {
       "id": "1",
       "duracaoEmSegundos": 3600,
-      "descricao": "Estudar Vue.js 3.2",
+      "descricao": "Estudar Vue.js 3.3",
       "projeto": {
         "id": "7272",
         "nome": "ByteBank"

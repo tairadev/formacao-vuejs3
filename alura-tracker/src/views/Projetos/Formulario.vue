@@ -34,7 +34,9 @@ export default defineComponent({
   },
   mounted() {
     if (this.id) {
-      const projeto = this.store.state.projetos.find((p) => p.id === this.id);
+      const projeto = this.store.state.projeto.projetos.find(
+        (p) => p.id === this.id
+      );
       this.nomeDoProjeto = projeto?.nome || "";
     }
   },
