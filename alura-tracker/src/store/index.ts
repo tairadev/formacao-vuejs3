@@ -4,10 +4,13 @@ import { createStore, Store, useStore as vuexUseStore } from "vuex";
 import {
   ADICIONAR_PROJETO,
   ATUALIZAR_PROJETO,
+  DEFINIR_PROJETOS,
   NOTIFICAR,
   REMOVER_PROJETO,
 } from "./mutations-types";
 import { INotificacao } from "@/interfaces/INotificacao";
+import { OBTER_PROJETOS } from "./actions-types";
+import http from "@/http";
 
 interface State {
   projetos: IProjeto[];
@@ -40,6 +43,9 @@ export const store = createStore<State>({
     [REMOVER_PROJETO](state, id: string) {
       state.projetos = state.projetos.filter((projeto) => projeto.id !== id);
     },
+    [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
+      state.projetos = projetos;
+    },
     [NOTIFICAR](state, notificacao: INotificacao) {
       state.notificacoes.push(notificacao);
       setTimeout(() => {
@@ -47,6 +53,13 @@ export const store = createStore<State>({
           (n) => n.id !== notificacao.id
         );
       }, 3000);
+    },
+  },
+  actions: {
+    [OBTER_PROJETOS]({ commit }) {
+      http.get("/projetos").then((response) => {
+        commit(DEFINIR_PROJETOS, response.data);
+      });
     },
   },
 });

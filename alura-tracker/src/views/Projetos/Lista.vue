@@ -43,11 +43,15 @@
 import { computed, defineComponent } from "vue";
 import { useStore } from "@/store";
 import { REMOVER_PROJETO } from "@/store/mutations-types";
+import { OBTER_PROJETOS } from "@/store/actions-types";
 
 export default defineComponent({
   name: "ListaView",
   setup() {
     const store = useStore();
+
+    store.dispatch(OBTER_PROJETOS);
+
     return {
       store,
       projetos: computed(() => store.state.projetos),
