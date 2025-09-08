@@ -42,8 +42,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useStore } from "@/store";
-import { REMOVER_PROJETO } from "@/store/mutations-types";
-import { OBTER_PROJETOS } from "@/store/actions-types";
+import { EXCLUIR_PROJETO, OBTER_PROJETOS } from "@/store/actions-types";
 
 export default defineComponent({
   name: "ListaView",
@@ -59,7 +58,10 @@ export default defineComponent({
   },
   methods: {
     removerProjeto(id: string) {
-      this.store.commit(REMOVER_PROJETO, id);
+      this.store
+        .dispatch(EXCLUIR_PROJETO, id)
+        .then(() => this.store.dispatch(OBTER_PROJETOS))
+        .catch((erro: Error) => console.error(erro));
     },
   },
 });
