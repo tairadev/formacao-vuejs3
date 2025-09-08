@@ -8,5 +8,30 @@
       "id": "3d73",
       "nome": "StarkBank"
     }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "duracaoEmSegundos": 3600,
+      "descricao": "Estudar Vue.js 3",
+      "projeto": {
+        "id": "7272",
+        "nome": "ByteBank"
+      }
+    },
+    {
+      "id": "7a8b",
+      "duracaoEmSegundos": 3,
+      "descricao": "Tarefa Vue"
+    },
+    {
+      "id": "0b25",
+      "duracaoEmSegundos": 34,
+      "descricao": "Minha Task",
+      "projeto": {
+        "id": "3d73",
+        "nome": "StarkBank"
+      }
+    }
   ]
 }

@@ -2,18 +2,36 @@
   <Formulario @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
     <Tarefa v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa" />
-    <Box v-if="!tarefas.length">
-      Você não está muito produtivo hoje :(
-    </Box>
+    <Box v-if="!tarefas.length"> Você não está muito produtivo hoje :( </Box>
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Modal title</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">...</section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Save changes</button>
+          <button class="button">Cancel</button>
+        </footer>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
-import ITarefa from "../interfaces/ITarefa";
 import Box from "../components/Box.vue";
+import { useStore } from "@/store";
+import {
+  CADASTRAR_TAREFA,
+  OBTER_PROJETOS,
+  OBTER_TAREFAS,
+} from "@/store/actions-types";
+import ITarefa from "@/interfaces/ITarefa";
 
 export default defineComponent({
   name: "TarefasView",
@@ -22,15 +40,17 @@ export default defineComponent({
     Tarefa,
     Box,
   },
-  data() {
-    return {
-      tarefas: [] as ITarefa[],
-    };
-  },
   methods: {
     salvarTarefa(tarefa: ITarefa) {
-      this.tarefas.push(tarefa);
+      this.store.dispatch(CADASTRAR_TAREFA, tarefa);
     },
+  },
+  setup() {
+    const store = useStore();
+    store.dispatch(OBTER_PROJETOS);
+    store.dispatch(OBTER_TAREFAS);
+
+    return { tarefas: computed(() => store.state.tarefas), store };
   },
 });
 </script>
